@@ -8,15 +8,14 @@ apiConfig.use(cors());
 apiConfig.use(bodyParser.json({limit: "50mb"}));
 apiConfig.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit: 5000}));
 
-#For EKS micro2service.default.svc.cluster.local
-#For dockercompose mymicro2
-var hostname = 
-var hostport = 
+//For EKS micro2service.default.svc.cluster.local
+//For dockercompose mymicro2
+var hostname = 'micro2service.default.svc.cluster.local'
+var hostport = '3002'
 
 ApiFunction = async() =>{
 
 apiConfig.get('/getAll', async(req, res)=>{
-console.log("iiiiiii")
    // const {z} = req.body;
  let data1 = await axios.get(`http://${hostname}:${hostport}/getAll`)
    res.json(data1.data)
