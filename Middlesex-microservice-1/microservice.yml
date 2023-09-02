@@ -1,0 +1,10 @@
+version: '3'
+services:
+    mymicro1:
+       image: microservice1:1.0
+       ports:
+           - "3001:3001"
+    mymicro2:
+       image: microservice2:1.0
+       ports:
+           - "3002:3002"
