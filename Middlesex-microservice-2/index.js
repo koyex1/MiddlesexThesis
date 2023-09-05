@@ -82,6 +82,6 @@ apiConfig.delete('/deleteAll', async(req, res)=>{
 
 })
 
-http.Server(apiConfig).listen(3002, '0.0.0.0', ()=>{
+http.Server(apiConfig).listen(3002, ()=>{
     console.log("server running on 3002")
 })
