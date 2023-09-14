@@ -4,19 +4,23 @@ var axios = require('axios');
 var bodyParser = require('body-parser')
 var apiConfig = express();
 var cors = require('cors');
+
+
 apiConfig.use(cors());
 apiConfig.use(bodyParser.json({limit: "50mb"}));
 apiConfig.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit: 5000}));
 
-//For EKS micro2service.default.svc.cluster.local
-//For dockercompose mymicro2
-var hostname = 'micro2service.default.svc.cluster.local'
+//For EKS: micro2service.default.svc.cluster.local
+//For dockercompose: mymicro2
+//For localhost
+var hostname = '172.31.7.69'
 var hostport = '3002'
 
 ApiFunction = async() =>{
 
 apiConfig.get('/getAll', async(req, res)=>{
    // const {z} = req.body;
+//`http://${hostname}:${hostport}/getAll`
  let data1 = await axios.get(`http://${hostname}:${hostport}/getAll`)
    res.json(data1.data)
 })
@@ -24,8 +28,7 @@ apiConfig.get('/getAll', async(req, res)=>{
 apiConfig.get('/get/:id', async(req, res)=>{
    // const {z} = req.body;
    const itemId = parseInt(req.params.id);
-   let data1 = await axios.get(`http://${hostname}:${hostport}/get/`+itemId)
-   console.log(data1.data)
+   let data1 = await axios.get(`http://${hostname}:${hostport}/get/`+itemId) 
    res.json(data1.data)
 })
 
@@ -57,6 +60,7 @@ apiConfig.delete('/delete/:id', async(req, res)=>{
 
 ApiFunction();
 
-http.Server(apiConfig).listen(3001,'0.0.0.0', ()=>{
+http.Server(apiConfig).listen(3001, ()=>{
     console.log("server running on 3001")
 })
+
